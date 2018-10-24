@@ -139,7 +139,7 @@ describe('<Universal />', () => {
   });
 
   describe('debug', () => {
-    it('not setting debug should load script without restrictions', () => {
+    it('loads the GA script without restrictions when debug is not set', () => {
       const analytics = mockAnalytics();
       const universal = mount(<Universal {...mockProps} />);
       expect(universal.find(ImportRemote).prop('source')).toBe(
@@ -149,7 +149,7 @@ describe('<Universal />', () => {
       expect(analytics).not.toHaveBeenCalledWith('set', 'sendHitTask', null);
     });
 
-    it('true', () => {
+    it('loads the GA debug script and prevent sending data to GA when debug is set to true', () => {
       const analytics = mockAnalytics();
       const universal = mount(<Universal {...mockProps} debug />);
       expect(universal.find(ImportRemote).prop('source')).toBe(
@@ -159,7 +159,7 @@ describe('<Universal />', () => {
       expect(analytics).toHaveBeenCalledWith('set', 'sendHitTask', null);
     });
 
-    it('false', () => {
+    it('loads the GA script and does not prevent sending data to GA when debug is set to false', () => {
       const analytics = mockAnalytics();
       const universal = mount(<Universal {...mockProps} debug={false} />);
       expect(universal.find(ImportRemote).prop('source')).toBe(
@@ -171,7 +171,7 @@ describe('<Universal />', () => {
   });
 
   describe('disableTracking', () => {
-    it('true', () => {
+    it('loads the GA script and prevent sending data to GA when disableTracking is set to true', () => {
       const analytics = mockAnalytics();
       const universal = mount(<Universal {...mockProps} disableTracking />);
       expect(universal.find(ImportRemote).prop('source')).toBe(
@@ -181,7 +181,7 @@ describe('<Universal />', () => {
       expect(analytics).toHaveBeenCalledWith('set', 'sendHitTask', null);
     });
 
-    it('false', () => {
+    it('loads the GA script and does not prevent sending data to GA when disableTracking is set to false', () => {
       const analytics = mockAnalytics();
       const universal = mount(
         <Universal {...mockProps} disableTracking={false} />,

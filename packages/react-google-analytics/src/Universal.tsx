@@ -69,8 +69,8 @@ export default class UniversalGoogleAnalytics extends React.PureComponent<
     };
 
     if (debug || disableTracking) {
-      // The debug version of the analytics.js library
-      // https://developers.google.com/analytics/devguides/collection/analyticsjs/debugging
+      // Prevent data being sent to Google
+      // https://developers.google.com/analytics/devguides/collection/analyticsjs/debugging#testing_your_implementation_without_sending_hits
       googleAnalytics('set', 'sendHitTask', null);
     }
 

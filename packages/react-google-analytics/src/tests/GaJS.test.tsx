@@ -193,7 +193,7 @@ describe('<GaJS />', () => {
   });
 
   describe('disableTracking', () => {
-    it('not setting disableTracking should load script without restrictions', () => {
+    it('loads the GA script and injects the setup script when disableTracking is not set', () => {
       const gajs = mount(<GaJS {...mockProps} />);
       expect(gajs.find(ImportRemote).prop('source')).toBe(GA_JS_SCRIPT);
       expect(
@@ -201,7 +201,7 @@ describe('<GaJS />', () => {
       ).toHaveProperty('__html', SETUP_SCRIPT);
     });
 
-    it('true', () => {
+    it('loads the GA script and injects the debug setup script when disableTracking is set to true', () => {
       const gajs = mount(<GaJS {...mockProps} disableTracking />);
       expect(gajs.find(ImportRemote).prop('source')).toBe(GA_JS_SCRIPT);
       expect(
@@ -209,7 +209,7 @@ describe('<GaJS />', () => {
       ).toHaveProperty('__html', setupWithDebugScript(mockProps.account));
     });
 
-    it('false', () => {
+    it('loads the GA script and injects the setup script when disableTracking is set to false', () => {
       const gajs = mount(<GaJS {...mockProps} disableTracking={false} />);
       expect(gajs.find(ImportRemote).prop('source')).toBe(GA_JS_SCRIPT);
       expect(
